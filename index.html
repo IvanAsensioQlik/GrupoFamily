@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<link rel="shortcut icon" type="image/x-icon" href="https://ivanasensioqlik.github.io/GrupoFamily/img/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="https://ivanasensioqlik.github.io/GrupoFamily/favicon.ico">
 <title>Family &amp; Cash | Resultados Comerciales, Qlik Cloud</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
 
@@ -82,6 +82,12 @@
   .filter-body qlik-embed { width:100%; height:100%; display:block; }
   .filter-main-object { flex:1; min-height:0; position:relative; }
   .filter-main-embed { width:100%; height:100%; }
+  .qa-panel { position:fixed; inset:0; background:#fff; z-index:66; display:none; flex-direction:column; }
+  .qa-panel.open { display:flex; }
+  .qa-header { flex-shrink:0; display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-bottom:1px solid #eee; font-weight:700; }
+  .qa-close { border:none; background:none; font-size:20px; cursor:pointer; }
+  .qa-body { flex:1; overflow-y:auto; position:relative; }
+  .qa-body .qa-embed, .qa-body qlik-embed { width:100%; display:block; }
   .header-filter-btn-slot { width:40px; height:40px; flex-shrink:0; overflow:hidden; background:transparent; display:flex; align-items:center; justify-content:center; }
   .header-filter-btn-slot qlik-embed { width:100%; height:100%; display:block; }
   #global-filter-buttons { display:none; align-items:center; gap:6px; }
@@ -110,9 +116,9 @@
 <body>
 <div id="app-shell">
   <div id="global-header" style="background:#FFFFFF;color:#1E1E1E;">
-    <div class="gh-zone left"><button class="icon-btn" id="global-menu-btn" onclick="toggleHiddenMenu()" style="display:none;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><span class="gh-group"><img class="logo-img" src="https://ivanasensioqlik.github.io/GrupoFamily/img/Logo.png" alt="logo"></span></div>
+    <div class="gh-zone left"><button class="icon-btn" id="global-menu-btn" onclick="toggleHiddenMenu()" style="display:none;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><span class="gh-group"><img class="logo-img" src="https://ivanasensioqlik.github.io/GrupoFamily/Logo.png" alt="logo"></span></div>
     <div class="gh-zone center"></div>
-    <div class="gh-zone right"><span id="global-filter-buttons" style="display:none;"><div class="header-filter-btn-slot" data-lazy-embed data-ui="analytics/chart" data-object-id="hgUUhvd" data-app-id="ef93c74d-8121-4458-8ff4-82aa0143ebe8"></div></span><button class="icon-btn" id="global-filter-btn" style="display:none;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></button><button class="icon-btn" id="global-info-btn" style="display:none;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></button></div>
+    <div class="gh-zone right"><button class="icon-btn" id="global-answers-btn" onclick="toggleQlikAnswersPanel()" aria-label="Qlik Answers"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.937A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .962 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.962 0z"/></svg></button><span id="global-filter-buttons" style="display:none;"><div class="header-filter-btn-slot" data-lazy-embed data-ui="analytics/chart" data-object-id="hgUUhvd" data-app-id="ef93c74d-8121-4458-8ff4-82aa0143ebe8"></div></span><button class="icon-btn" id="global-filter-btn" style="display:none;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></button><button class="icon-btn" id="global-info-btn" style="display:none;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></button></div>
   </div>
   <div id="tabs-viewport">
 <section class="tab-section" id="tab-0" style="background:#0F1B2D;color:#F1F5F9;display:flex;">
@@ -191,7 +197,7 @@
     <div class="header-right"></div>
   </div>
   <div class="tab-content">
-    <div class="objects-grid" style="gap:15px;"><div class="objects-row" style="flex:0 0 100%;min-height:300px;"><div class="obj-embed-wrap" id="obj-65myh8c" style="flex:1 1 0%;min-width:0;background:#F7F8FA;border:none;box-shadow:0 4px 14px rgba(0,0,0,0.12);position:relative;border-radius:6px;overflow:hidden;"><button class="obj-expand-btn" onclick="toggleExpand('65myh8c')" aria-label="Ampliar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button><qlik-embed ui="classic/chart" app-id="ef93c74d-8121-4458-8ff4-82aa0143ebe8" object-id="kVkGKTM"></qlik-embed></div></div></div>
+    <div class="objects-grid" style="gap:15px;"><div class="objects-row" style="flex:0 0 100%;min-height:300px;"><div class="obj-embed-wrap" id="obj-65myh8c" style="flex:1 1 0%;min-width:0;background:#F7F8FA;border:none;box-shadow:0 4px 14px rgba(0,0,0,0.12);position:relative;border-radius:6px;overflow:hidden;"><button class="obj-expand-btn" onclick="toggleExpand('65myh8c')" aria-label="Ampliar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button><qlik-embed ui="analytics/chart" app-id="ef93c74d-8121-4458-8ff4-82aa0143ebe8" object-id="kVkGKTM"></qlik-embed></div></div></div>
   </div>
 </section>
   </div>
@@ -214,6 +220,7 @@
 <div class="info-popup" id="info-popup-9a9828b" style="display:none;"><div class="info-popup-inner" style="background:#FFFFFF;color:#111111;"><button class="popup-close" onclick="toggleInfoPopup('9a9828b')">&times;</button><div class="info-popup-title" style="color:#111111;">Sobre esta app</div><p style="margin:0 0 10px;">Seleccione el icono de filtros para filtrar por cualquier dimensión.</p><p style="margin:0 0 10px;">Los datos seleccionados se heredan en cada pestaña.</p><p style="margin:0 0 10px;">Puede borrar las selecciones en cualquier momento mediante el botón de reciclar '↻'</p></div></div>
 <div class="filter-panel" id="global-filter-panel" style="width:290px;"><div class="filter-header"><span>Filtros</span><button class="filter-close" onclick="toggleFilterPanel()">&times;</button></div><div class="filter-body"><div class="filter-main-object"><div class="filter-main-embed" data-lazy-embed data-ui="analytics/chart" data-object-id="ugDSg" data-app-id="ef93c74d-8121-4458-8ff4-82aa0143ebe8"></div></div></div></div>
 <div class="filter-backdrop" id="filter-backdrop"></div>
+<div class="qa-panel" id="qlik-answers-panel"><div class="qa-header"><span>Asistente Qlik Answers</span><button class="qa-close" onclick="toggleQlikAnswersPanel()">&times;</button></div><div class="qa-body"><div class="qa-embed" data-lazy-embed data-ui="ai/agentic-assistant" data-assistant-id="a7a0e1b5-ef44-4fb2-86a4-5b4e69279fdd" data-appearance="qlik-light" style="display:block;height:600px;"></div></div></div>
 <script>
   const TAB_COUNT = 4;
   const TAB_META = [{"id":"lnamwyw","infoEnabled":true,"isWelcome":true},{"id":"9a9828b","infoEnabled":true,"isWelcome":false},{"id":"8v8ptrr","infoEnabled":false,"isWelcome":false},{"id":"j8p81ec","infoEnabled":false,"isWelcome":false}];
@@ -235,8 +242,10 @@
     if (!container || container.dataset.mounted === '1') return;
     var el = document.createElement('qlik-embed');
     el.setAttribute('ui', container.dataset.ui);
-    el.setAttribute('app-id', container.dataset.appId || '');
+    if (container.dataset.appId) el.setAttribute('app-id', container.dataset.appId);
     if (container.dataset.objectId) el.setAttribute('object-id', container.dataset.objectId);
+    if (container.dataset.assistantId) el.setAttribute('assistant-id', container.dataset.assistantId);
+    if (container.dataset.appearance) el.setAttribute('appearance', container.dataset.appearance);
     container.appendChild(el);
     container.dataset.mounted = '1';
   }
@@ -292,6 +301,12 @@
     const opening = el && !el.classList.contains('open');
     if (el) el.classList.toggle('open');
     if (backdrop) backdrop.classList.toggle('open');
+    if (opening) mountAllIn(el);
+  }
+  function toggleQlikAnswersPanel() {
+    const el = document.getElementById('qlik-answers-panel');
+    const opening = el && !el.classList.contains('open');
+    if (el) el.classList.toggle('open');
     if (opening) mountAllIn(el);
   }
   function toggleHiddenMenu() {
